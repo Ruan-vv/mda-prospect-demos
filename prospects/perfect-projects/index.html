@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Perfect Projects | Enquiry & Project Flow Demo</title>
+<meta name="description" content="Interactive MDA Growth Systems workflow concept prepared for Perfect Projects.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><div class="mark">PP</div><div><strong>Perfect Projects</strong><small>Enquiry & project flow concept</small></div></div>
+      <div class="demo-pill">Interactive demo · sample data only</div>
+      <div class="view-switch" role="tablist" aria-label="Demo views">
+        <button id="customerTab" class="active" type="button" onclick="showView('customer')">Customer enquiry</button>
+        <button id="dashboardTab" type="button" onclick="showView('dashboard')">Project dashboard</button>
+      </div>
+      <button class="reset" type="button" onclick="resetDemo()">Reset demo</button>
+    </div>
+  </header>
+
+  <main id="customerView">
+    <div class="customer-shell">
+      <section class="customer-hero">
+        <div>
+          <div class="eyebrow">A faster route from enquiry to job</div>
+          <h1>Tell us what you need <span>before</span> the WhatsApp back-and-forth.</h1>
+          <p>This concept gives Perfect Projects the key job information up front — service, suburb, photos, urgency and rough budget — while keeping the customer journey quick and simple.</p>
+        </div>
+        <aside class="hero-card">
+          <div class="mini">What happens behind the scenes</div>
+          <h3>Every enquiry arrives ready to action.</h3>
+          <div class="flow-list">
+            <div class="flow-item"><span class="flow-num">1</span>Customer chooses urgent repair or planned project</div>
+            <div class="flow-item"><span class="flow-num">2</span>Job details, area, photos and budget are captured</div>
+            <div class="flow-item"><span class="flow-num">3</span>The enquiry appears in the project dashboard automatically</div>
+            <div class="flow-item"><span class="flow-num">4</span>Quote, site visit and follow-up stay attached to one job</div>
+          </div>
+          <div class="system-note">Prototype prepared around Perfect Projects' current building, renovation and handyman service mix.</div>
+        </aside>
+      </section>
+
+      <section id="enquirySection">
+        <div class="eyebrow">Start an enquiry</div>
+        <div class="path-grid">
+          <button class="path-card selected" id="urgentPath" type="button" onclick="choosePath('urgent')">
+            <span class="tag">Fast route</span><div class="icon urgent-icon">!</div><h3>Urgent repair</h3><p>Leaks, plumbing failures, roof/waterproofing problems or a repair that needs attention quickly.</p>
+          </button>
+          <button class="path-card" id="plannedPath" type="button" onclick="choosePath('planned')">
+            <span class="tag">Project route</span><div class="icon planned-icon">⌂</div><h3>Planned project</h3><p>Bathrooms, tiling, painting, paving, carpentry, alterations or a larger renovation project.</p>
+          </button>
+        </div>
+
+        <div class="form-card" id="formCard">
+          <div class="form-head"><div><h2 id="formTitle">Urgent repair details</h2><p id="formSub">A short brief so the team knows what they are walking into.</p></div><span class="stage">1–2 min</span></div>
+          <form id="enquiryForm">
+            <div class="grid2">
+              <div class="field"><label for="name">Your name</label><input id="name" required placeholder="e.g. Sarah Naidoo"></div>
+              <div class="field"><label for="phone">WhatsApp / phone</label><input id="phone" required placeholder="e.g. 082 555 0188"></div>
+              <div class="field"><label for="suburb">Suburb / area</label><input id="suburb" required placeholder="e.g. Durban North"></div>
+              <div class="field"><label for="service">What do you need help with?</label><select id="service" required><option value="">Select service</option><option>Plumbing</option><option>Bathroom renovation</option><option>Tiling</option><option>Painting</option><option>Paving</option><option>Roofing & waterproofing</option><option>Carpentry</option><option>Building / renovation</option><option>General handyman work</option><option>Other</option></select></div>
+            </div>
+            <div class="grid2">
+              <div class="field"><label for="urgency">How urgent is it?</label><select id="urgency" required><option value="high">Urgent — today / active problem</option><option value="medium">Soon — within a few days</option><option value="low">Planned — flexible timing</option></select></div>
+              <div class="field"><label for="budget">Rough budget</label><select id="budget" required><option value="">Choose a range</option><option>Under R5,000</option><option>R5,000 – R15,000</option><option>R15,000 – R40,000</option><option>R40,000 – R80,000</option><option>R80,000 – R150,000</option><option>R150,000+</option><option>Not sure yet</option></select></div>
+            </div>
+            <div class="field planned-only hidden"><label for="startDate">When would you ideally like work to start?</label><input id="startDate" type="date"></div>
+            <div class="field"><label for="details">Tell us what is happening</label><textarea id="details" required placeholder="A quick description of the job, affected area and anything the team should know..."></textarea></div>
+            <div class="field"><label>Photos of the work</label><label class="upload" for="photos"><span class="upload-box">＋</span><span><strong id="uploadTitle">Add photos from your phone</strong><span id="uploadText">Photos help the team assess the job before replying.</span></span><input id="photos" type="file" accept="image/*" multiple hidden></label></div>
+            <div class="form-actions"><button class="primary" type="submit">Send enquiry to dashboard</button><button class="secondary" type="button" onclick="prefillDemo()">Fill sample enquiry</button><div class="privacy">Interactive concept only. Nothing entered here is sent to Perfect Projects or MDA.</div></div>
+          </form>
+          <div class="success hidden" id="successBox">
+            <div class="success-top"><div class="check">✓</div><div><h3>Enquiry captured.</h3><p>This job has now been added to the Perfect Projects dashboard.</p></div></div>
+            <div class="summary" id="successSummary"></div>
+            <button class="primary switch-dashboard" type="button" onclick="showView('dashboard')">See it in the dashboard →</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <main id="dashboardView" class="hidden">
+    <div class="dashboard">
+      <div class="dash-head"><div><div class="eyebrow">Perfect Projects operations</div><h1>Enquiries, quotes and follow-ups in one place.</h1><p>Urgent repairs rise to the top. Planned jobs stay organised from first enquiry to booked work.</p></div><div class="live-badge"><span class="dot"></span> Demo workflow active</div></div>
+      <div class="kpis">
+        <div class="kpi"><div class="kpi-top"><span>Open enquiries</span><span class="kpi-icon">◎</span></div><strong id="kpiOpen">0</strong><small>Across current pipeline</small></div>
+        <div class="kpi"><div class="kpi-top"><span>Urgent today</span><span class="kpi-icon">!</span></div><strong id="kpiUrgent">0</strong><small>Priority response queue</small></div>
+        <div class="kpi"><div class="kpi-top"><span>Quotes awaiting reply</span><span class="kpi-icon">R</span></div><strong id="kpiQuotes">0</strong><small>Follow-up reminders active</small></div>
+        <div class="kpi"><div class="kpi-top"><span>Booked jobs</span><span class="kpi-icon">✓</span></div><strong id="kpiBooked">0</strong><small>Reminders automatically stopped</small></div>
+      </div>
+      <div class="dashboard-grid">
+        <section class="panel">
+          <div class="panel-head"><h2>Job pipeline</h2><div class="filters"><button class="filter active" data-filter="all" onclick="setFilter('all',this)">All</button><button class="filter" data-filter="high" onclick="setFilter('high',this)">Urgent</button><button class="filter" data-filter="quote" onclick="setFilter('quote',this)">Quote follow-up</button><button class="filter" data-filter="visit" onclick="setFilter('visit',this)">Site visits</button></div></div>
+          <div class="jobs" id="jobsList"></div>
+        </section>
+        <aside class="panel detail">
+          <div class="panel-head"><h2>Selected job</h2><span class="stage" id="detailStage">New enquiry</span></div>
+          <div class="detail-body" id="detailBody"></div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <div class="footer-note">Unofficial interactive workflow concept prepared by MDA Growth Systems for Perfect Projects. Sample names, amounts and job details are demonstration data only. This prototype is not connected to Perfect Projects' live systems.</div>
+  <div id="toast" class="toast">Updated</div>
+</div>
+<script defer src="script.js"></script>
+</body>
+</html>
